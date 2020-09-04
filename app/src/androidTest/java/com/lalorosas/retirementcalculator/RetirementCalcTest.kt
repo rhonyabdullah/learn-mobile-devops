@@ -7,19 +7,18 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
+import com.microsoft.appcenter.espresso.Factory
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
-import org.junit.After
 import org.junit.runner.RunWith
-import com.microsoft.appcenter.espresso.Factory
-import com.microsoft.appcenter.espresso.ReportHelper
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -27,7 +26,7 @@ class RetirementCalcTest {
 
     @Rule
     @JvmField
-    var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+    var mActivityTestRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Rule
     @JvmField
@@ -112,7 +111,8 @@ class RetirementCalcTest {
 
         val appCompatButton = onView(
             allOf(
-                withId(R.id.calculateButton), withText("Calculate"),
+                withId(R.id.calculateButton),
+                withText("Calculate retirement"),
                 childAtPosition(
                     childAtPosition(
                         withId(android.R.id.content),
